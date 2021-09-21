@@ -11,8 +11,8 @@ function App() {
   
   
   const addRandomContact = () => {
-
     let newRandomContact = remainingContacts[Math.floor(Math.random() * remainingContacts.length)];
+
     setContacts([...contacts, newRandomContact])
   }
 
@@ -23,7 +23,6 @@ function App() {
     copyArr.sort(function(a, b) {
       return a.name.localeCompare(b.name)
     })
-    console.log(copyArr)
     setContacts(copyArr)
   }
 
@@ -32,8 +31,16 @@ function App() {
 
     copyArr.sort(function(a, b) {
        return b.popularity - a.popularity
-      })
-      setContacts(copyArr)
+    })
+    setContacts(copyArr)
+  }
+
+  const deleteContact = contactId => {
+    let copyArr = [...contacts]
+
+    let filteredContacts = copyArr.filter((contact) => contact.id !== contactId )
+
+    setContacts(filteredContacts)
   }
 
 
@@ -52,6 +59,7 @@ function App() {
         <th>Popularity</th>
         <th>Won an Oscar</th>
         <th>Won an Emmy</th>
+        <th>Actions</th>
       </tr>
       {contacts.map((contact) => (
         <tr>
@@ -60,12 +68,13 @@ function App() {
           <td> <p>{contact.popularity}</p></td>
           <td> {contact.wonOscar && (<span>🏆</span>)}</td>
           <td> {contact.wonEmmy && (<span>🏆</span>)}</td>
+          <td> <button onClick={() => deleteContact(contact.id)}>Delete</button></td>
         </tr>
           ))}
       </table>
     </div>
   )
-  
 }
+
 export default App;
 
