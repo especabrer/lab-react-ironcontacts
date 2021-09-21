@@ -13,11 +13,27 @@ function App() {
   const addRandomContact = () => {
 
     let newRandomContact = remainingContacts[Math.floor(Math.random() * remainingContacts.length)];
-
-    console.log("contacts :" , contacts)
-    console.log("remainingContacts :" , remainingContacts)
-
     setContacts([...contacts, newRandomContact])
+  }
+
+
+  const sortByName = () => {
+    let copyArr = [...contacts]
+
+    copyArr.sort(function(a, b) {
+      return a.name.localeCompare(b.name)
+    })
+    console.log(copyArr)
+    setContacts(copyArr)
+  }
+
+  const sortByPopularity = () => {
+    let copyArr = [...contacts]
+
+    copyArr.sort(function(a, b) {
+       return b.popularity - a.popularity
+      })
+      setContacts(copyArr)
   }
 
 
@@ -26,6 +42,8 @@ function App() {
     <div className="App">
       <h2>IronContacts</h2>
       <button onClick={addRandomContact}> Add Random Contact</button>
+      <button onClick={sortByName}> Sort by name</button>
+      <button onClick={sortByPopularity}> Sort by popularity</button>
 
       <table>
       <tr>
