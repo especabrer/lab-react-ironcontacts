@@ -1,15 +1,32 @@
 import "./App.css";
-import Contacts from "./contacts.json";
+import totalContacts from "./contacts.json";
 import React, { useState } from 'react';
 
 
 function App() {
 
-  const [contacts, setContacts] = useState([Contacts[0], Contacts[1], Contacts[2], Contacts[3], Contacts[4]])
+  const [contacts, setContacts] = useState([totalContacts[0], totalContacts[1], totalContacts[2], totalContacts[3], totalContacts[4]])
+  
+  let remainingContacts = totalContacts.filter((contact) =>  !contacts.includes(contact) )
+  
+  
+  const addRandomContact = () => {
+
+    let newRandomContact = remainingContacts[Math.floor(Math.random() * remainingContacts.length)];
+
+    console.log("contacts :" , contacts)
+    console.log("remainingContacts :" , remainingContacts)
+
+    setContacts([...contacts, newRandomContact])
+  }
+
 
 
   return (
     <div className="App">
+      <h2>IronContacts</h2>
+      <button onClick={addRandomContact}> Add Random Contact</button>
+
       <table>
       <tr>
         <th>Picture</th>
